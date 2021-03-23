@@ -3,6 +3,7 @@
 
 
 
+
 <label>タスクの内容<br /> <input type="text" name="content"
     value="${task.content}" />
 </label>

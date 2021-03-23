@@ -37,8 +37,6 @@ public class CreateServlet extends HttpServlet {
 
             Task m = new Task();
 
-           ;
-
             String content = request.getParameter("content");
             m.setContent(content);
 
@@ -46,9 +44,11 @@ public class CreateServlet extends HttpServlet {
             m.setCreated_at(currentTime);
             m.setUpdated_at(currentTime);
 
+            // データベースに保存
             em.getTransaction().begin();
             em.persist(m);
             em.getTransaction().commit();
+            request.getSession().setAttribute("flush", "登録が完了しました。");
             em.close();
 
             response.sendRedirect(request.getContextPath() + "/index");
