@@ -39,7 +39,8 @@ public class IndexServlet extends HttpServlet {
         int page = 1;
         try {
             page = Integer.parseInt(request.getParameter("page"));
-        } catch(NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
 
         // 最大件数と開始位置を指定してメッセージを取得
         List<Task> tasks = em.createNamedQuery("getAllTasks", Task.class)
@@ -48,7 +49,7 @@ public class IndexServlet extends HttpServlet {
                 .getResultList();
 
         // 全件数を取得
-        long tasks_count = (long)em.createNamedQuery("getTasksCount", Long.class)
+        long tasks_count = (long) em.createNamedQuery("getTasksCount", Long.class)
                 .getSingleResult();
 
         em.close();
@@ -58,7 +59,7 @@ public class IndexServlet extends HttpServlet {
         request.setAttribute("page", page);
 
         // フラッシュメッセージがセッションスコープにセットされていたら
-        if(request.getSession().getAttribute("flush") != null ) {
+        if (request.getSession().getAttribute("flush") != null) {
             // セッションスコープ内のフラッシュメッセージをリクエストスコープに保存し、セッションスコープからは削除する
             request.setAttribute("flush", request.getSession().getAttribute("flush"));
             request.getSession().removeAttribute("flush");
